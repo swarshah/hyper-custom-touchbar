@@ -55,6 +55,8 @@ module.exports = {
 }
 ```
 
+And now restart you Hyper terminal and you should see populated touch bar.
+
 ![Screenshot](./ScreenshotMain.png)
 
 ![Screenshot](./ScreenshotGit.png)
