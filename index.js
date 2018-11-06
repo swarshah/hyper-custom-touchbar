@@ -66,7 +66,7 @@ exports.middleware = () => next => action => {
 };
 
 exports.decorateConfig = (config) => {
-    options = config.customTouchbar;
+    options = config.hyperCustomTouchbar;
     return config;
 };
 
