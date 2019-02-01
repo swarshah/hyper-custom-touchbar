@@ -9,28 +9,30 @@ exports.onWindow = win => {
     const buttons = [];
     const popovers = [];
 
-    for (const [index, module] of Object.entries(options)) { 
-        // create buttons for each child
-        buttons[module.label] = [];
-        for (const [key, btn] of Object.entries(module.options)) {
-            const b = new TouchBarButton({
-                label: `${btn.label}`,
-                click: () => {
-                    const esc = btn.esc || false;
-                    writeToTerminal(win, btn.command, esc)
-                }
-            });
-            buttons[module.label].push(b);
-        }
+    if (options) {
+        for (const [index, module] of Object.entries(options)) { 
+            // create buttons for each child
+            buttons[module.label] = [];
+            for (const [key, btn] of Object.entries(module.options)) {
+                const b = new TouchBarButton({
+                    label: `${btn.label}`,
+                    click: () => {
+                        const esc = btn.esc || false;
+                        writeToTerminal(win, btn.command, esc)
+                    }
+                });
+                buttons[module.label].push(b);
+            }
     
-        // create popover for each parent
-        const pop = new TouchBarPopover({
-			label: module.label,
-			items: new TouchBar([
-                ...buttons[module.label]
-			])
-        });
-        popovers.push(pop);
+            // create popover for each parent
+            const pop = new TouchBarPopover({
+                label: module.label,
+                items: new TouchBar([
+                    ...buttons[module.label]
+                ])
+            });
+            popovers.push(pop);
+        }
     }
 
     // static clear button
