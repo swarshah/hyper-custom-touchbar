@@ -74,7 +74,7 @@ exports.decorateConfig = (config) => {
     return config;
 };
 
-function writeToTerminal(win, command, options) {
+function writeToTerminal(win, command, options = {}) {
     // \x1B ESC char
     // \x03 ETX char for ^C
     // \x0D CR char for enter
