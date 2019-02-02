@@ -74,12 +74,12 @@ exports.decorateConfig = (config) => {
     return config;
 };
 
-function writeToTerminal(win, command, options) {
+function writeToTerminal(win, command, options = {}) {
     // \x1B ESC char
     // \x03 ETX char for ^C
     // \x0D CR char for enter
     let esc = options.esc ? `\x1B` : `\x03`
     let enter = options.promptUser ? `` : `\x0D`
 
-    win.sessions.get(currentUid).write(`${esc}${command}${enter}`);
+    win.sessions.get(currentUid).write(`${esc} ${command}${enter}`);
 }
