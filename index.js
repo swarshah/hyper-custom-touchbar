@@ -81,5 +81,5 @@ function writeToTerminal(win, command, options = {}) {
     let esc = options.esc ? `\x1B` : `\x03`
     let enter = options.promptUser ? `` : `\x0D`
 
-    win.sessions.get(currentUid).write(`${esc}${command}${enter}`);
+    win.sessions.get(currentUid).write(`${esc} ${command}${enter}`);
 }
