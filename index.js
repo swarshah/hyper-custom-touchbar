@@ -10,7 +10,7 @@ exports.onWindow = win => {
     const popovers = [];
 
     if (options) {
-        for (const [index, module] of Object.entries(options)) { 
+        for (const [index, module] of Object.entries(options)) {
             // create buttons for each child
             buttons[module.label] = [];
             for (const [key, btn] of Object.entries(module.options)) {
@@ -23,7 +23,7 @@ exports.onWindow = win => {
                 });
                 buttons[module.label].push(b);
             }
-    
+
             // create popover for each parent
             const pop = new TouchBarPopover({
                 label: module.label,
@@ -55,7 +55,7 @@ exports.onWindow = win => {
 
 exports.middleware = () => next => action => {
     switch (action.type) {
-      case 'SESSION_SET_ACTIVE': 
+      case 'SESSION_SET_ACTIVE':
       case 'SESSION_ADD': {
         window.rpc.emit('uid set', action.uid);
         break;
