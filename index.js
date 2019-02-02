@@ -10,20 +10,22 @@ exports.onWindow = win => {
     const popovers = [];
 
     if (options) {
-        for (const [index, module] of Object.entries(options)) { 
+        for (const [index, module] of Object.entries(options)) {
             // create buttons for each child
             buttons[module.label] = [];
             for (const [key, btn] of Object.entries(module.options)) {
                 const b = new TouchBarButton({
                     label: `${btn.label}`,
                     click: () => {
-                        const esc = btn.esc || false;
-                        writeToTerminal(win, btn.command, esc)
+                        writeToTerminal(win, btn.command, {
+                            esc: btn.esc || false,
+                            promptUser: btn.prompt || false,
+                        })
                     }
                 });
                 buttons[module.label].push(b);
             }
-    
+
             // create popover for each parent
             const pop = new TouchBarPopover({
                 label: module.label,
@@ -55,7 +57,7 @@ exports.onWindow = win => {
 
 exports.middleware = () => next => action => {
     switch (action.type) {
-      case 'SESSION_SET_ACTIVE': 
+      case 'SESSION_SET_ACTIVE':
       case 'SESSION_ADD': {
         window.rpc.emit('uid set', action.uid);
         break;
@@ -72,12 +74,12 @@ exports.decorateConfig = (config) => {
     return config;
 };
 
-function writeToTerminal(win, command, esc = false) {
+function writeToTerminal(win, command, options) {
     // \x1B ESC char
     // \x03 ETX char for ^C
     // \x0D CR char for enter
-    if(esc === true)
-        win.sessions.get(currentUid).write(`\x1B${command}\x0D`);
-    else
-        win.sessions.get(currentUid).write(`\x03${command}\x0D`);
+    let esc = options.esc ? `\x1B` : `\x03`
+    let enter = options.promptUser ? `` : `\x0D`
+
+    win.sessions.get(currentUid).write(`${esc}${command}${enter}`);
 }

@@ -33,6 +33,7 @@ module.exports = {
           { label: 'status',  command: 'git status' },
           { label: 'log',  command: 'git log' },
           { label: 'add .',  command: 'git add .' },
+          { label: 'clone',  command: 'git clone ', prompt: true },
         ]
       },
       {
@@ -54,6 +55,11 @@ module.exports = {
   }
 }
 ```
+
+Please note that `label` and `command` are always mandatory. The optional keys are:
+- `esc` (default is `false`): setting `esc` to `true` will be like pressing the `Escape` key before your command runs, instead of the classic `Ctrl`+`C`, which is useful in contexts (e.g. _VIM_) where the running operation can’t be stopped by `Ctrl`+`C`.
+- `prompt`(default is `false`): by setting `prompt` to `true`, the plugin won’t press the `Enter` key after writing the command, so that the user can complete the command by a custom input (see example with `git clone `; notice the space ending the `command`).
+
 
 And now restart you Hyper terminal and you should see populated touch bar.
 
