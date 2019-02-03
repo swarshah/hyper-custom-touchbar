@@ -11,5 +11,9 @@
     "macos",
     "hyper.app",
     "hyper-plugin"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SwarShah/hyper-custom-touchbar.git"
+  }
 }
