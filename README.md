@@ -1,6 +1,6 @@
-# Hyper Custom Touchbar
+# Hyper Custom Touch Bar
 
-**hyper-custom-touchbar is a TouchBar plugin for [Hyper.app](https://hyper.is/)**. It replaces the TouchBar area with user-defined executable commands.
+**hyper-custom-touchbar is a Touch Bar plugin for [Hyper.app](https://hyper.is/)**. It replaces the Touch Bar area with user-defined executable commands.
 
 ## Install
 
@@ -15,7 +15,7 @@ module.exports = {
 ```
 
 
-## Custom TouchBar Buttons
+## Custom Touch Bar Buttons
 
 Following is what my shortcuts look like but feel free to change them as you like to better suit your development needs.
 
@@ -61,11 +61,11 @@ Please note that `label` and `command` are always mandatory. The optional keys a
 - `prompt`(default is `false`): by setting `prompt` to `true`, the plugin won’t press the `Enter` key after writing the command, so that the user can complete the command by a custom input (see example with `git clone `; notice the space ending the `command`).
 
 
-And now restart you Hyper terminal and you should see populated touch bar.
+And now restart your Hyper terminal and you should see populated Touch Bar.
 
-![Screenshot](./ScreenshotMain.png)
+![Screenshot](https://raw.githubusercontent.com/SwarShah/hyper-custom-touchbar/master/ScreenshotMain.png)
 
-![Screenshot](./ScreenshotGit.png)
+![Screenshot](https://raw.githubusercontent.com/SwarShah/hyper-custom-touchbar/master/ScreenshotGit.png)
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/SwarShah/hyper-custom-touchbar/blob/master/LICENSE) file for details
