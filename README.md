@@ -69,9 +69,9 @@ Please note that `command` is always mandatory. The optional keys are:
 
 And now restart your Hyper terminal and you should see populated Touch Bar.
 
-![Screenshot](https://raw.githubusercontent.com/SwarShah/hyper-custom-touchbar/master/ScreenshotMAIN.png)
+![Screenshot](https://raw.githubusercontent.com/SwarShah/hyper-custom-touchbar/master/ScreenshotMain.png)
 
-![Screenshot](https://raw.githubusercontent.com/SwarShah/hyper-custom-touchbar/master/ScreenshotGIT.png)
+![Screenshot](https://raw.githubusercontent.com/SwarShah/hyper-custom-touchbar/master/ScreenshotGit.png)
 
 ![Screenshot](https://raw.githubusercontent.com/SwarShah/hyper-custom-touchbar/master/ScreenshotCD.png)
 
