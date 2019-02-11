@@ -1,4 +1,4 @@
-const { TouchBar } = require('electron');
+const { TouchBar, nativeImage } = require('electron');
 
 let currentUid, options, currentWindow;
 
@@ -41,8 +41,16 @@ function populateTouchBar() {
             // create buttons for each child
             buttons[module.label] = [];
             for (const [key, btn] of Object.entries(module.options)) {
+                const icon = btn.icon ? nativeImage.createFromPath(btn.icon) : '';
+                const backgroundColor = btn.backgroundColor ? btn.backgroundColor : '#363636';
+                let iconPosition = btn.iconPosition ? btn.iconPosition : 'left';
+                if (btn.iconPosition === undefined && btn.label === undefined)
+                    iconPosition = 'overlay';
                 const b = new TouchBarButton({
-                    label: `${btn.label}`,
+                    label: btn.label || '',
+                    icon: icon,
+                    backgroundColor: backgroundColor,
+                    iconPosition: iconPosition,
                     click: () => {
                         writeToTerminal(btn.command, {
                             esc: btn.esc || false,
@@ -55,7 +63,8 @@ function populateTouchBar() {
 
             // create popover for each parent
             const pop = new TouchBarPopover({
-                label: module.label,
+                label: module.label || '',
+                icon: module.icon ? nativeImage.createFromPath(module.icon) : '',
                 items: new TouchBar([
                     ...buttons[module.label]
                 ])
