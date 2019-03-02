@@ -32,7 +32,7 @@ exports.decorateConfig = (config) => {
 };
 
 function populateTouchBar() {
-    const { TouchBarButton, TouchBarPopover } = TouchBar;
+    const { TouchBarPopover } = TouchBar;
     const popovers = [];
     const mainButtons = [];
 
