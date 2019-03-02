@@ -26,6 +26,8 @@ module.exports = {
   config: {
     ...
       hyperCustomTouchbar: [
+      // if you just need a single button then don't add options array
+      { label: 'man', command: 'man ', prompt: true },
       {
         label: 'git',
         options: [
@@ -61,8 +63,8 @@ module.exports = {
 Please note that `command` is always mandatory. The optional keys are:
 - `label` (default is `''`): label for the button.
 - `icon` (default is `''`): full path of the image file. According to Apple, ideal icon size is `36px × 36px` and maximum icon size is `44px × 44px`.
-- `iconPosition` (default is `left`): possible values are `left`, `right` and `overlay`. **Note**: this is not supported for main level popover buttons.
-- `backgroundColor` (default is `#363636`): string hex code representing the button's background color. **Note**: this is not supported for main level popover buttons.
+- `iconPosition` (default is `left`): possible values are `left`, `right` and `overlay`. **Note**: this is not supported for main level popover buttons but will work for single button like `man` from example.
+- `backgroundColor` (default is `#363636`): string hex code representing the button's background color. **Note**: this is not supported for main level popover buttons but will work for single button like `man` from example.
 - `esc` (default is `false`): setting `esc` to `true` will be like pressing the `Escape` key before your command runs, instead of the classic `Ctrl`+`C`, which is useful in contexts (e.g. _VIM_) where the running operation can’t be stopped by `Ctrl`+`C`.
 - `prompt`(default is `false`): by setting `prompt` to `true`, the plugin won’t press the `Enter` key after writing the command, so that the user can complete the command by a custom input (see example with `git clone `; notice the space ending the `command`).
 

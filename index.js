@@ -32,63 +32,82 @@ exports.decorateConfig = (config) => {
 };
 
 function populateTouchBar() {
-    const { TouchBarButton, TouchBarPopover } = TouchBar;
-    const buttons = [];
+    const { TouchBarPopover } = TouchBar;
     const popovers = [];
+    const mainButtons = [];
 
     if (currentWindow && options) {
-        for (const [index, module] of Object.entries(options)) {
-            // create buttons for each child
-            buttons[module.label] = [];
-            for (const [key, btn] of Object.entries(module.options)) {
-                const icon = btn.icon ? nativeImage.createFromPath(btn.icon) : '';
-                const backgroundColor = btn.backgroundColor ? btn.backgroundColor : '#363636';
-                let iconPosition = btn.iconPosition ? btn.iconPosition : 'left';
-                if (btn.iconPosition === undefined && btn.label === undefined)
-                    iconPosition = 'overlay';
-                const b = new TouchBarButton({
-                    label: btn.label || '',
-                    icon: icon,
-                    backgroundColor: backgroundColor,
-                    iconPosition: iconPosition,
-                    click: () => {
-                        writeToTerminal(btn.command, {
-                            esc: btn.esc || false,
-                            promptUser: btn.prompt || false,
-                        })
-                    }
-                });
-                buttons[module.label].push(b);
-            }
-
-            // create popover for each parent
-            const pop = new TouchBarPopover({
-                label: module.label || '',
-                icon: module.icon ? nativeImage.createFromPath(module.icon) : '',
-                items: new TouchBar([
-                    ...buttons[module.label]
-                ])
-            });
-            popovers.push(pop);
-        }
-
         // static clear button
-        const clearBtn = new TouchBarButton({
+        const clearBtn = createTouchBarButton({
             label: 'clear',
             backgroundColor: '#d13232',
-            click: () => {
-                writeToTerminal('clear');
-            }
+            command: 'clear'
         });
+        mainButtons.push(clearBtn);
+
+        for (const [index, module] of Object.entries(options)) {
+            // if there is options array create popover and buttons
+            if (module.options) {
+                const buttons = [];
+                // create buttons for child
+                for (const [key, btn] of Object.entries(module.options)) {
+                    buttons.push(createTouchBarButton(btn));
+                }
+                // create popover for each parent
+                const popover = new TouchBarPopover({
+                    label: module.label || '',
+                    icon: module.icon ? nativeImage.createFromPath(module.icon) : '',
+                    items: new TouchBar([
+                        ...buttons
+                    ])
+                });
+                popovers.push(popover);
+            }
+            // if not array then consider as a button
+            else {
+                mainButtons.push(createTouchBarButton(module));
+            }
+        }
 
         // main touchbar
         const touchBar = new TouchBar([
-            clearBtn,
+            ...mainButtons,
             ...popovers
         ]);
 
         currentWindow.setTouchBar(touchBar);
     }
+}
+
+function createTouchBarButton(options = {}) {
+    const { TouchBarButton } = TouchBar;
+    const label = options.label || '';
+    const icon = options.icon ? nativeImage.createFromPath(options.icon) : '';
+    const backgroundColor = options.backgroundColor ? options.backgroundColor : '#363636';
+    let iconPosition = options.iconPosition ? options.iconPosition : 'left';
+    // if no icon position and no label then center the icon
+    if (options.iconPosition === undefined && options.label === undefined)
+        iconPosition = 'overlay';
+    const command = options.command || '';
+    // for vim
+    const esc = options.esc || false;
+    // to wait for user input
+    const promptUser = options.prompt || false;
+
+    const button = new TouchBarButton({
+        label: label,
+        icon: icon,
+        backgroundColor: backgroundColor,
+        iconPosition: iconPosition,
+        click: () => {
+            writeToTerminal(command, {
+                esc: esc,
+                promptUser: promptUser,
+            });
+        }
+    });
+
+    return button;
 }
 
 function writeToTerminal(command, options = {}) {
