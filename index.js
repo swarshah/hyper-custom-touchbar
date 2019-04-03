@@ -37,14 +37,6 @@ function populateTouchBar() {
     const mainButtons = [];
 
     if (currentWindow && options) {
-        // static clear button
-        const clearBtn = createTouchBarButton({
-            label: 'clear',
-            backgroundColor: '#d13232',
-            command: 'clear'
-        });
-        mainButtons.push(clearBtn);
-
         for (const [index, module] of Object.entries(options)) {
             // if there is options array create popover and buttons
             if (module.options) {
