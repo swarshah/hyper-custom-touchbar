@@ -27,6 +27,7 @@ module.exports = {
     ...
       hyperCustomTouchbar: [
       // if you just need a single button then don't add options array
+      { label: 'clear', command: 'clear', backgroundColor: '#d13232' },
       { label: 'man', command: 'man ', prompt: true },
       {
         label: 'git',
