@@ -2,12 +2,6 @@ const { TouchBar, nativeImage } = require('electron');
 
 let currentUid, options, currentWindow;
 
-exports.onApp = app => {
-    app.on('browser-window-focus', (event, win) => {
-        currentWindow = win;
-    });
-};
-
 exports.onWindow = win => {
     win.rpc.on('uid set', uid => { currentUid = uid });
     currentWindow = win;
