@@ -1,7 +1,7 @@
 {
   "name": "hyper-custom-touchbar",
   "description": "Make touchbar useful in Hyper terminal.",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "main": "index.js",
   "author": "Swar Shah <me@swarshah.com>",
   "license": "MIT",
