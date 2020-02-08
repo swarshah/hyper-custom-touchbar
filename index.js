@@ -39,8 +39,7 @@ exports.decorateConfig = (config) => {
 
 function populateTouchBar() {
     const { TouchBarPopover } = TouchBar;
-    const popovers = [];
-    const mainButtons = [];
+    const tbElements = [];
 
     if (currentWindow && options) {
         for (const [index, module] of Object.entries(options)) {
@@ -59,19 +58,16 @@ function populateTouchBar() {
                         ...buttons
                     ])
                 });
-                popovers.push(popover);
+                tbElements.push(popover);
             }
             // if not array then consider as a button
             else {
-                mainButtons.push(createTouchBarButton(module));
+                tbElements.push(createTouchBarButton(module));
             }
         }
 
         // main touchbar
-        const touchBar = new TouchBar([
-            ...mainButtons,
-            ...popovers
-        ]);
+        const touchBar = new TouchBar([...tbElements]);
 
         currentWindow.setTouchBar(touchBar);
     }
