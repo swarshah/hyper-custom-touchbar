@@ -111,5 +111,5 @@ function writeToTerminal(command, options = {}) {
     let esc = options.esc ? `\x1B` : `\x03`
     let enter = options.promptUser ? `` : `\x0D`
 
-    currentWindow.sessions.get(currentUid).write(`${esc} ${command}${enter}`);
+    currentWindow.sessions.get(currentUid).write(`${esc}${command}${enter}`);
 }
