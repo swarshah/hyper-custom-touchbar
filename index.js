@@ -54,9 +54,12 @@ function populateTouchBar() {
                 const popover = new TouchBarPopover({
                     label: module.label || '',
                     icon: module.icon ? nativeImage.createFromPath(module.icon) : '',
-                    items: new TouchBar([
-                        ...buttons
-                    ])
+                    items: new TouchBar({
+                        items: [
+                            ...buttons
+                        ]
+                    }),
+                    showCloseButton: true,
                 });
                 tbElements.push(popover);
             }
@@ -67,7 +70,9 @@ function populateTouchBar() {
         }
 
         // main touchbar
-        const touchBar = new TouchBar([...tbElements]);
+        const touchBar = new TouchBar({
+            items: [...tbElements]
+        });
 
         currentWindow.setTouchBar(touchBar);
     }
